@@ -295,8 +295,11 @@ for show, df in facebook_df.items():
 total_reach = [df['Reach'].sum() for df in facebook_df.values()]
 shows = list(facebook_df.keys())
 
+def label_function(val):
+    return f'{val:.1f}%\n({total_reach[int(val * len(total_reach) / 100)]})'
+
 plt.figure(figsize=(8, 8))
-plt.pie(total_reach, labels=shows, autopct='%1.1f%%', startangle=140)
+plt.pie(total_reach, labels=shows, autopct=label_function, startangle=140)
 plt.title('Total Reach Distribution')
 plt.legend()
 plt.tight_layout()
